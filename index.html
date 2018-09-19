@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+<script type="text/javascript" charset="utf8" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.js"></script>
+
+<style>
+
+#bg{
+	
+
+	background-repeat: no-repeat;
+	background-size: 100vw 100vh;
+	opacity: 0.7;
+}
+
+
+</style>
+
+<body class="img-responsive" id = "bg" style="background-image: url('background.jpg');"  >
+		
+<!-- <img class="logo" src="/cs.jpg" alt="My_Logo"> -->
+<!-- <div class="img-responsive" id = "bg" style="background-image: url('background.jpg');"> -->
+	<div class="container">
+	   <div id="login"></div>
+	   <div id="register"></div>
+	</div>
+	<div id="#login">
+		<div class="row box" id="login-box">
+			<div class="col-md-6 col-md-offset-3">
+			  <div class="panel panel-login">
+				<div class="panel-body">
+				  <div class="row">
+					<div class="col-lg-12">
+					  <div class="alert alert-danger hide" role="alert">error/success msg</div>
+					  <form id="login-form" method="post" name="login_form" role="form" style="display: block;" action="/login">
+						<h2>LOGIN</h2>
+						  <div class="form-group">
+							<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value=""  required>
+						  </div>
+						  <div class="form-group">
+							<input type="password" name="lpassword" id="lpassword" tabindex="2" class="form-control" placeholder="Password" required> 
+						  </div>
+						  <div class="col-xs-6 form-group pull-right">     
+								<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+						  </div>
+					  </form>
+					</div>
+				  </div>
+				</div>
+				<div class="panel-heading">
+				  <div class="row">
+					<div class="col-xs-6 tabs">
+					  <a href="javascript:void(0);" id="register-form-link" class="btn-click" target-div="register"><div class="register btn-click">REGISTER</div></a>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<div id ="#register">
+		<div class="row box" style="display:none" id="register-box">
+			<div class="col-md-6 col-md-offset-3">
+			  <div class="panel panel-login">
+				<div class="panel-body">
+				  <div class="row">
+					<div class="col-lg-12">
+					  <form id="register-form" action="/register" method="post" role="form">
+						<h2>REGISTER</h2>
+							<div class="form-group" id = "error-box">
+
+							</div>
+						  <div class="form-group">
+							<input type="text" name="first_name" id="first_name" tabindex="1" class="form-control" placeholder="First Name" value="" required>
+						  </div>
+						  <div class="form-group">
+							<input type="text" name="last_name" id="last_name" tabindex="1" class="form-control" placeholder="Last Name" value="" required> 
+						  </div>
+						  <div class="form-group">
+							<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="" required>
+							<span class="error_message hide" name = "status" id="status">error/success msg</span>
+							</div>
+							<div class="form-group">
+							<input type="text" name="wnum" id="wnum" tabindex="1" class="form-control" placeholder="Last Name" value="" required> 
+							</div>
+						  <div class="form-group">
+							<input type="password" name="rpassword" id="rpassword" tabindex="2" class="form-control" placeholder="Password" required>
+							</div>
+							<div class="form-group">
+									<input type="password" name="crpassword" id="crpassword" tabindex="2" class="form-control" placeholder="Confirm Password" required>
+							</div>
+						 
+						  <div class="form-group">
+							<div class="row">
+							  <div class="col-sm-6 col-sm-offset-3">
+								<input type="submit" name="register-submit" id="register-submit" onclick="validate()" tabindex="4" class="form-control btn btn-register" value="Register Now">
+							  </div>
+							</div>
+						  </div>
+					  </form>
+					</div>
+				  </div>
+				</div>
+				<div class="panel-heading">
+				  <div class="row">
+					<div class="col-xs-6">
+					  <a href="javascript:void(0);" class="active btn-click" id="login-form-link" target-div="login"><div class="login">LOGIN</div></a>
+					</div>
+					<div class="col-xs-6">
+					<a href="#" id="register-form-link"><div class="register">Forget Password</div></a>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<!-- </div> -->
+
+</body>
+
+<script type="text/javascript">
+
+$(document).on('click','.btn-click', function(e) {
+	var targeDiv = $(this).attr('target-div')+'-box';
+	$('.box').hide();
+	$('#'+targeDiv).show();
+});
+let form = document.querySelector("#register-form");
+
+form.addEventListener("submit", validate)
+
+function validate(){
+	event.preventDefault();
+	if(document.getElementById('rpassword').value == document.getElementById('crpassword').value ){
+		form.submit();
+	}
+	else{
+		var element = document.getElementById("error-box");
+		element.innerHTML="";
+		var para = document.createElement("p");
+		var node = document.createTextNode("Password not matched");
+		para.appendChild(node);
+		
+		element.appendChild(para);	
+	}
+}
+</script>
+</html>

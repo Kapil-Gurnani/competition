@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+<script type="text/javascript" charset="utf8" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.js"></script>
+
+<style>
+
+#bg{
+	
+
+	background-repeat: no-repeat;
+	background-size: 100vw 100vh;
+	opacity: 0.7;
+}
+
+
+</style>
+
+<body class="img-responsive" id = "bg" style="background-image: url('background.jpg');"  >
+
+	
+	<br /><br /><br /><br />
+	<table class="table">
+    <thead>
+      <tr class="info">
+        <th>Name</th>
+        <th>Email</th>
+        <th>Contact No.</th>
+		    <th>Video</th>
+      </tr>
+    </thead>
+    <tbody>
+           
+      <tr class="success">
+        <td>{{name}}</td>
+        <td>{{email}}</td>
+        <td>{{number}}</td>
+        <td>
+           <video width="320" height="200" controls>
+  <source src={{file}} type="video/mp4">
+Your browser does not support the video tag.
+</video> 
+          </td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+</body>
+
+</html>

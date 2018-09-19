@@ -1,0 +1,106 @@
+<html>
+<head>
+<title>Node.JS Email application</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	var from,to,subject,text;
+	$("#send_email").click(function(){		
+		to=$("#to").val();
+		subject=$("#subject").val();
+		text=$("#content").val();
+		$("#message").text("Sending E-mail...Please wait");
+		$.get("http://localhost:3000/send",{to:to,subject:subject,text:text},function(data){
+		if(data=="sent")
+		{
+			$("#message").empty().html("<p>Email is been sent at "+to+" . Please check inbox !</p>");
+		}
+
+});
+	});
+});
+</script>
+<style>
+#container
+{
+	margin-left:400px;
+	margin-top:50px;
+}
+#to,#subject,#content
+{
+	font-family: "Segoe UI";
+	font-size:18px;
+	width:530px;
+}
+h1
+{
+	font-family: "Segoe UI";
+	font-size:40px;	
+	color: #3b5998;
+}
+p
+{
+	color:green;
+}
+#send_email
+{
+	font-size:15px;
+	font-family: "Segoe UI";
+}
+#message
+{
+	font-size:18px;
+}
+
+
+		#bg{
+			
+		
+			background-repeat: no-repeat;
+			background-size: 100vw 100vh;
+			opacity: 0.7;
+		}
+		
+		
+		</style>
+		
+		
+</head>
+<body class="img-responsive" id = "bg" style="background-image: url('background.jpg');"  >
+		
+<div id="container">
+<h1>Upload Your Video</h1>
+<input type="text" id="subject" placeholder="Write Subject"><br>
+<form id="uploadForm" enctype="multipart/form-data" action="/api/photo" method="post">
+      <input type="file" id="name" name="userPhoto" />
+      <input type="submit" value="Upload Image" name="submit">
+      <span id = "status"></span>
+</form>
+<textarea id="content" rows="5" cols="40" placeholder="Write what you want to send"></textarea><br>
+<button id="send_email">Send Email</button><br>
+<span id="message"></span>
+</div>
+</body>
+<script>
+	$(document).ready(function() {
+  
+	   $('#uploadForm').submit(function() {
+		   $("#status").empty().text("File is uploaded");
+  
+		  $(this).ajaxSubmit({
+  
+			  error: function(xhr) {
+					  status('Error: ' + xhr.status);
+			  },
+  
+			  success: function(response) {
+					  console.log(response)
+					  $("#status").empty().text(response);
+			  }
+	  });
+  
+	  return false;
+	  });    
+  });
+	</script>
+</html>
